@@ -25,7 +25,7 @@ public class TextReaderTest {
         Assertions.assertEquals(input,result);
     }
 
-    @org.junit.Test
+    @Test
     public void testIntType(){
         String word = "2";
         byte[] buf = word.getBytes();
@@ -37,7 +37,7 @@ public class TextReaderTest {
     }
 
 
-    @org.junit.Test
+    @Test
     public void testIntTypeButLessThan1(){
         String word = "-1\n2";
         byte[] buf = word.getBytes();
@@ -48,7 +48,7 @@ public class TextReaderTest {
         Assertions.assertEquals(2,result);
     }
 
-    @org.junit.Test
+    @Test
     public void testIsIntType(){
         String word = "string\n2";
         byte[] buf = word.getBytes();

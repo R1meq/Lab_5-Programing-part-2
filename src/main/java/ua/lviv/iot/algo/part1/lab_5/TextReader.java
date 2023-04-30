@@ -20,7 +20,7 @@ class TextReader {
     public static int getMaxLengthOfWord() {
         Scanner scanner = new Scanner(System.in);
         int maxLengthOfWord = 0;
-        boolean isCorrect = false;
+        boolean isCorrect = true;
 
         while (isCorrect) {
             System.out.println("Enter max length of word: ");
@@ -28,7 +28,7 @@ class TextReader {
             try {
                 maxLengthOfWord = Integer.parseInt(input);
                 if (maxLengthOfWord >= 1) {
-                    isCorrect = true;
+                    isCorrect = false;
                 } else {
                     System.out.println("length should be greater or equal 1");
                 }
