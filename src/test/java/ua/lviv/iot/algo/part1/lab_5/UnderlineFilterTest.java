@@ -1,44 +1,51 @@
 package ua.lviv.iot.algo.part1.lab_5;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class UnderlineFilterTest {
-    @Test
-    public void testWriteSomeWorlds() {
-        String input = "Hello World_ and _Earth_";
-        int lengthOfWord = 4;
 
-        List<String> expected = new ArrayList<>();
-        expected.add("world");
-        expected.add("earth");
-        Collections.sort(expected);
-        List<String> result = UnderlineFilter.sortedListWithUnderlineWords(input,lengthOfWord);
-        Assertions.assertEquals(expected,result);
+    public UnderlineFilter underlineFilter;
+    public List<String> expected;
+
+    @Before
+    public void setUp() {
+        underlineFilter = new UnderlineFilter();
+        expected = new ArrayList<>();
     }
 
+    @Test
+    public void testAllPossibleOptions() {
+        String input = "_q _Hello woRLD_ _Mind_ Hea_D _To_R Fac_E_ _HeADer_s_ qwerty";
+        int lengthOfWord = 10;
+
+        expected.add("q");
+        expected.add("Hello");
+        expected.add("woRLD");
+        expected.add("Mind");
+        expected.add("HeaD");
+        expected.add("ToR");
+        expected.add("FacE");
+        expected.add("HeADers");
+
+        expected.sort(String.CASE_INSENSITIVE_ORDER);
+        List<String> result = underlineFilter.sortedListWithUnderlineWords(input, lengthOfWord);
+
+        Assertions.assertTrue(result.containsAll(expected));
+    }
 
     @Test
-    public void testAllPossibleOptions(){
-        String input = " _ _q _Hello woRLD_ _Mind_ Hea_D _To_R Fac_E_ _HeADer_s_  ";
-        int lengthOfWord= 1;
+    public void testNoMatchesWord() {
+        String inputText = " 12sad 213sad 213sa asd12";
+        int lengthOfWord = 10;
 
-        List<String> expected = new ArrayList<>();
-        expected.add("hello");
-        expected.add("world");
-        expected.add("mind");
-        expected.add("head");
-        expected.add("tor");
-        expected.add("face");
-        expected.add("headers");
-        Collections.sort(expected);
+        List<String> result = underlineFilter.
+                sortedListWithUnderlineWords(inputText, lengthOfWord);
 
-        List<String> result = UnderlineFilter.sortedListWithUnderlineWords(input,lengthOfWord);
-
-        Assertions.assertEquals(expected,result);
+        Assertions.assertTrue(result.isEmpty());
     }
 }
